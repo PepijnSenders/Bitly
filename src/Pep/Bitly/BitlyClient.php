@@ -4,6 +4,8 @@ namespace Pep\Bitly;
 
 use Guzzle\Http\Client;
 
+use Pep\Bitly\BitlyRequest\BitlyRequest;
+
 class BitlyClient {
 
   const SECURE_API = 'https://api-ssl.bit.ly';

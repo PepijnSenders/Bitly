@@ -4,32 +4,34 @@ use Pep\Bitly\BitlyClient;
 use Pep\Bitly\BitlyRequest\BitlyLinks;
 use Pep\Bitly\BitlyRequest\BitlyData;
 
+
+
 class BitlyTest extends PHPUnit_Framework_TestCase {
 
-  private $testUser = [
-    'client_id' => '######',
-    'client_secret' => '######',
-    'redirect_uri' => '######',
-    'username' => '######',
-    'password' => '######',
-  ];
-
   public function testGetResourceToken() {
-    $bitly = new BitlyClient($this->testUser['client_id'], $this->testUser['client_secret']);
+    if (file_exists(__DIR__ . '/testuser.php')) {
+      $testUser = require_once(__DIR__ . '/testuser.php');
+    } else {
+      throw new Exception('No testUser');
+    }
+    $bitly = new BitlyClient($testUser['client_id'], $testUser['client_secret']);
 
-    $accessToken = $bitly->getAccessTokenViaResourceOwner($this->testUser['username'], $this->testUser['password']);
+    $accessToken = $bitly->getAccessTokenViaResourceOwner($testUser['username'], $testUser['password']);
 
     $this->assertEquals(strlen($accessToken), 40);
-
-    var_dump($accessToken);die;
 
     return $accessToken;
   }
 
   public function testGetBasicToken() {
-    $bitly = new BitlyClient($this->testUser['client_id'], $this->testUser['client_secret']);
+    if (file_exists(__DIR__ . '/testuser.php')) {
+      $testUser = require_once(__DIR__ . '/testuser.php');
+    } else {
+      throw new Exception('No testUser');
+    }
+    $bitly = new BitlyClient($testUser['client_id'], $testUser['client_secret']);
 
-    $accessToken = $bitly->getAccessTokenViaBasicAuth($this->testUser['username'], $this->testUser['password']);
+    $accessToken = $bitly->getAccessTokenViaBasicAuth($testUser['username'], $testUser['password']);
 
     $this->assertEquals(strlen($accessToken), 40);
   }
