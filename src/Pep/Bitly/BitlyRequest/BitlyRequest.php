@@ -48,7 +48,6 @@ class BitlyRequest {
     $jsonString = (string) $response->getBody();
 
     $body = json_decode($jsonString);
-    var_dump($jsonString);
 
     if ($body && property_exists($body, 'status_txt')) {
       self::throwBitlyError($body->status_txt);
