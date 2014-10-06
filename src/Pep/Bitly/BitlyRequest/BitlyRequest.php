@@ -26,10 +26,12 @@ class BitlyRequest {
         throw new BitlyRequestException('Missing argument Short Url or Hash');
       case 'MISSING_ARG_URI':
         throw new BitlyRequestException('Missing argument URI');
+      case 'INVALID_URI':
+        throw new BitlyRequestException('Invalid URI');
       case 'OK':
         break;
       default:
-        throw new BitlyRequestException('Invalid request');
+        throw new BitlyRequestException("Invalid request: $errorCode");
     }
   }
 
